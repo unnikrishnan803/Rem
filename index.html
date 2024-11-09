@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exam Countdown</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .countdown-container {
+            display: flex;
+            gap: 40px;
+        }
+
+        .countdown-box {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            color: #333;
+        }
+
+        p {
+            font-size: 24px;
+            color: #444;
+            font-weight: bold;
+        }
+
+        #oops-countdown, #ds-countdown {
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <div class="countdown-container">
+        <div class="countdown-box" id="oops-countdown">
+            <h2>OOPS Exam</h2>
+            <p id="oops-time"></p>
+        </div>
+        <div class="countdown-box" id="ds-countdown">
+            <h2>DS Exam</h2>
+            <p id="ds-time"></p>
+        </div>
+    </div>
+
+    <script>
+        // Set exam dates and times
+        const oopsExamDate = new Date("November 12, 2024 21:00:00").getTime();
+        const dsExamDate = new Date("November 13, 2024 13:00:00").getTime();
+
+        // Function to update countdowns
+        function updateCountdown() {
+            const now = new Date().getTime();
+            
+            // Calculate the remaining time for OOPS exam
+            const oopsTimeLeft = oopsExamDate - now;
+            const dsTimeLeft = dsExamDate - now;
+
+            // OOPS Countdown
+            const oopsDays = Math.floor(oopsTimeLeft / (1000 * 60 * 60 * 24));
+            const oopsHours = Math.floor((oopsTimeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const oopsMinutes = Math.floor((oopsTimeLeft % (1000 * 60 * 60)) / (1000 * 60));
+            
+            // DS Countdown
+            const dsDays = Math.floor(dsTimeLeft / (1000 * 60 * 60 * 24));
+            const dsHours = Math.floor((dsTimeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const dsMinutes = Math.floor((dsTimeLeft % (1000 * 60 * 60)) / (1000 * 60));
+
+            // Update the countdowns
+            document.getElementById("oops-time").innerHTML = `${oopsDays}d ${oopsHours}h ${oopsMinutes}m`;
+            document.getElementById("ds-time").innerHTML = `${dsDays}d ${dsHours}h ${dsMinutes}m`;
+        }
+
+        // Update every minute
+        setInterval(updateCountdown, 60000);
+
+        // Initial call
+        updateCountdown();
+    </script>
+</body>
+</html>
